@@ -1,0 +1,84 @@
+<style>
+  .modal-content {
+    background-color: #000;
+  }
+</style>
+
+<!-- Modal Info -->
+<div
+  class="modal fade"
+  id="modalInfo-{{ item.id }}"
+  tabindex="-1"
+  aria-labelledby="modalInfoLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalInfoLabel">{{ item.name }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">{{ item.description }}</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Confirm Purchase -->
+<div
+  class="modal fade"
+  id="modalPurchase-{{ item.id }}"
+  tabindex="-1"
+  aria-labelledby="modalPurchaseLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalPurchaseLabel">{{ item.name }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          {{ purchase_form.hidden_tag() }}
+          <h4 class="text-center">
+            Are you sure you want to buy {{ item.name }} for the price of
+            {{item.price}}$ ?
+          </h4>
+          <br />
+          <h6 class="text-center">
+            By clicking on Buy now, you will be buying that item from the
+            market.
+          </h6>
+          <br />
+          <input
+            id="purchased_item"
+            name="purchased_item"
+            type="hidden"
+            value="{{item.name}}"
+          />
+          {{ purchase_form.submit(class='btn btn-outline-success') }}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

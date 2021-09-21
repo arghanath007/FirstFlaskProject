@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% block title %} Market Page {% endblock %} {% block
+content %}
+<div class="position-relative">
+  <h1 class="position-absolute top-0 start-50 translate-middle">
+    This is the market page
+  </h1>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8 pt-5">
+      <h2>Available items in the Market</h2>
+      <p>Click on one of the items to start buying</p>
+      <table class="table table-hover table-dark">
+        <thead>
+          <tr>
+            <!-- Columns HERE -->
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Barcode</th>
+            <th scope="col">Price</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows Here -->
+          {% for item in items %} {% include 'includes/modals.html' %}
+          <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.barcode}}</td>
+            <td>${{item.price}}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline btn-info"
+                data-bs-toggle="modal"
+                data-bs-target="#modalInfo-{{ item.id }}"
+              >
+                More Info
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#modalPurchase-{{ item.id }}"
+              >
+                Buy Now
+              </button>
+            </td>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <h2>Owned Items</h2>
+      <p>Click on sell item to put the item back to the market</p>
+      <br />
+      <div class="row hidden-md-up">
+        {% for owned_item in owned_items %}
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">Card title</h4>
+              <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+              <p class="card-text p-y-1">
+                Some quick example text to build on the card title .
+              </p>
+              <a href="#" class="card-link">link</a>
+              <a href="#" class="card-link">Second link</a>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
